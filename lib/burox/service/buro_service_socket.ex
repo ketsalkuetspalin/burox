@@ -11,7 +11,7 @@ defmodule Burox.BuroService.Socket do
   Función para consultar información del Buró de Crédito
   De manera síncrona
   """
-  @spec post(String.t(), String.t()) :: String.t()
+  @spec post(String.t(), String.t()) :: {:ok, term} || {:error, term}
   def post(data, codigo_producto) do
     config_url = if codigo_producto == "107", do: :buro_url_prospector, else: :buro_url
     buro_url = Application.get_env(:burox, config_url)

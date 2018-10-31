@@ -37,9 +37,12 @@ defmodule Burox do
       cadena_respuesta: ""
     }
 
+    # Valida los datos de la petición
     with {:ok, request} <- Validator.valid?(data) do
       buro_service = Application.get_env(:burox, :buro_service)
+      # Convierte la petición a una cadena de texto
       request_string = Encoder.encode_buro(request, codigo_producto)
+      # Solicita el buró
       with {:ok, buro_response} <- buro_service.post(request_string, codigo_producto) do
         result = Map.merge(
           response_map,
